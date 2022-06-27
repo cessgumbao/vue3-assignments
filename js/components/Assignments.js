@@ -8,14 +8,27 @@ export default {
   },
   template: `
     <section class="flex gap-8">
-      <assignment-list title="In-Progress" :assignments="filters.inProgress"></assignment-list>
-      <assignment-list title="Completed" :assignments="filters.completed"></assignment-list>
-      <assignment-create @add="add"></assignment-create>
+      <assignment-list 
+        title="In-Progress" 
+        :assignments="filters.inProgress" 
+      >
+        <assignment-create @add="add"></assignment-create>
+      </assignment-list>
+      <div v-show="showCompleted">
+        <assignment-list 
+          title="Completed" 
+          :assignments="filters.completed"
+          :can-toggle 
+          @toggle="showCompleted = !showCompleted"
+        >
+        </assignment-list>
+      </div>
     </section>
   `,
   data() {
     return {
       assignments: [],
+      showCompleted: true,
     }
   },
 
@@ -33,7 +46,6 @@ export default {
       .then(response => response.json())
       .then(assignments => {
         this.assignments = assignments;
-        console.log(data)
       });
   },
 
