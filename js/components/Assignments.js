@@ -11,7 +11,6 @@ export default {
       <assignment-list title="In-Progress" :assignments="filters.inProgress"></assignment-list>
       <assignment-list title="Completed" :assignments="filters.completed"></assignment-list>
       <assignment-create @add="add"></assignment-create>
-      
     </section>
   `,
   data() {
