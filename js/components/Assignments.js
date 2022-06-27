@@ -7,7 +7,7 @@ export default {
     AssignmentCreate,
   },
   template: `
-    <section class="space-y-6">
+    <section class="flex gap-8">
       <assignment-list title="In-Progress" :assignments="filters.inProgress"></assignment-list>
       <assignment-list title="Completed" :assignments="filters.completed"></assignment-list>
       <assignment-create @add="add"></assignment-create>
@@ -15,11 +15,7 @@ export default {
   `,
   data() {
     return {
-      assignments: [
-        { name: 'Finish project', complete: false, id: 1, tag: 'math' },
-        { name: 'Read Chapter 4', complete: false, id: 2, tag: 'science' },
-        { name: 'Turn in homework', complete: false, id: 3, tag: 'math'},
-      ],
+      assignments: [],
     }
   },
 
@@ -30,6 +26,15 @@ export default {
         completed: this.assignments.filter(assignment => assignment.complete),
       }
     }
+  },
+
+  created() {
+    fetch("http://localhost:3001/assignments")
+      .then(response => response.json())
+      .then(assignments => {
+        this.assignments = assignments;
+        console.log(data)
+      });
   },
 
   methods: {

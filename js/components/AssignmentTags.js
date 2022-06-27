@@ -16,7 +16,6 @@ export default {
   props: {
     initialTags: Array,
     currentTag: String,
-    // modelValue: String,
   },
   computed: {
     tags() {
